@@ -23,6 +23,10 @@ const game = (function() {
   let playerWhoWin = null;
 
   const markSymbol = function(pos, cell) {
+    if (board[pos[0]][pos[1]] !== null) {
+      return;
+    }
+    
     board[pos[0]][pos[1]] = currentTurnPlayer.getSymbol();
     cell.textContent = `${currentTurnPlayer.getSymbol()}`;
     checkGameEnd();
