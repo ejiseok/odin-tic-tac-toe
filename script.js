@@ -10,18 +10,23 @@ const Player = function(symbol) {
   };
 };
 
-const Gameboard = (function() {
+const game = (function() {
+  const player1 = Player("O");
+  const player2 = Player("X");
   const board = [
     [null, null, null],
     [null, null, null],
     [null, null, null]
   ];
 
-  const player1 = Player("O");
-  const player2 = Player("X");
+  let currentTurnPlayer = player1;
+  let playerWhoWin = null;
 
-  const markSymbol = function(player, pos) {
-    board[pos[0]][pos[1]] = player.getSymbol();
+  const markSymbol = function(pos, cell) {
+    board[pos[0]][pos[1]] = currentTurnPlayer.getSymbol();
+    cell.textContent = `${currentTurnPlayer.getSymbol()}`;
+    checkGameEnd();
+    currentTurnPlayer = currentTurnPlayer === player1 ? player2 : player1;
   }
 
   const checkGameEnd = function() {
@@ -67,3 +72,9 @@ const Gameboard = (function() {
     checkGameEnd
   };
 })();
+
+for (let i = 0; i < 9; i++) {
+  const cell = document.querySelector(`.cell-${i}`);
+  const pos = [parseInt(i / 3), i % 3];
+  cell.addEventListener("click", () => game.markSymbol(pos, cell));
+}
