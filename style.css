@@ -29,3 +29,9 @@ body {
   font-size: 3rem;
   font-weight: bold;
 }
+
+.result {
+  margin-top: 5px;
+  width: 300px;
+  font-size: 1.2rem;
+}
