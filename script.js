@@ -1,18 +1,24 @@
-const Player = function(symbol) {
+const Player = function(symbol, name) {
   const _symbol = symbol;
+  const _name = name;
 
   const getSymbol = function() {
     return _symbol;
   }
 
+  const getName = function() {
+    return _name;
+  }
+
   return {
-    getSymbol
+    getSymbol,
+    getName
   };
 };
 
 const game = (function() {
-  const player1 = Player("O");
-  const player2 = Player("X");
+  const player1 = null;
+  const player2 = null;
   const board = [
     [null, null, null],
     [null, null, null],
@@ -21,6 +27,14 @@ const game = (function() {
 
   let currentTurnPlayer = player1;
   let playerWhoWin = null;
+
+  const setPlayer1 = function(symbol, name) {
+    player1 = new Player(symbol, name);
+  }
+
+  const setPlayer2 = function(symbol, name) {
+    player2 = new Player(symbol, name);
+  }
 
   const setPlayerWhowin = function(player) {
     playerWhoWin = player;
@@ -92,7 +106,8 @@ const game = (function() {
 
   return {
     markSymbol,
-    checkGameEnd
+    setPlayer1,
+    setPlayer2
   };
 })();
 
@@ -105,3 +120,11 @@ for (let i = 0; i < 9; i++) {
   const pos = [parseInt(i / 3), i % 3];
   cell.addEventListener("click", () => game.markSymbol(pos, cell));
 }
+
+const player1Name = prompt("플레이어 1 이름 입력");
+const player2Name = prompt("플레이어 2 이름 입력");
+
+player1Info.textContent = `${player1Name} -> O`;
+player2Info.textContent = `${player2Name} -> X`;
+game.setPlayer1("O", player1Name);
+game.setPlayer2("X", player2Name);
