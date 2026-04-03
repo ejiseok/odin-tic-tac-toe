@@ -1,20 +1,38 @@
-const Player = function(symbol, name) {
-  const _symbol = symbol;
-  const _name = name;
+// const Player = function(symbol, name) {
+//   const _symbol = symbol;
+//   const _name = name;
 
-  const getSymbol = function() {
-    return _symbol;
+//   const getSymbol = function() {
+//     return _symbol;
+//   }
+
+//   const getName = function() {
+//     return _name;
+//   }
+
+//   return {
+//     getSymbol,
+//     getName
+//   };
+// };
+
+class Player {
+  #symbol;
+  #name;
+
+  constructor(symbol, name) {
+    this.#symbol = symbol;
+    this.#name = name;
   }
 
-  const getName = function() {
-    return _name;
+  getSymbol() {
+    return this.#symbol;
   }
 
-  return {
-    getSymbol,
-    getName
-  };
-};
+  getName() {
+    return this.#name;
+  }
+}
 
 const game = (function() {
   const player1 = null;
