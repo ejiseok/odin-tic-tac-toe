@@ -34,6 +34,40 @@ class Player {
   }
 }
 
+class Game {
+  #player1;
+  #player2;
+  #currentTurnPlayer;
+  #board;
+
+  constructor(player1, player2) {
+    this.#player1 = player1;
+    this.#player2 = player2;
+    this.#currentTurnPlayer = this.#player1;
+    this.#board = [
+      [null, null, null],
+      [null, null, null],
+      [null, null, null]
+    ];
+  }
+
+  #switchPlayerTurn() {
+    if (this.#currentTurnPlayer === this.#player1) {
+      this.#currentTurnPlayer = this.#player2;
+    } else {
+      this.#currentTurnPlayer = this.#player1;
+    }
+  }
+
+  markSymbol(pos) {
+    if (this.#board[pos[0]][pos[1]] !== null) {
+      return;
+    }
+    this.#board[pos[0]][pos[1]] = this.#currentTurnPlayer.getSymbol();
+    this.#switchPlayerTurn();
+  }
+}
+
 const game = (function() {
   const player1 = null;
   const player2 = null;
