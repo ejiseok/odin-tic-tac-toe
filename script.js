@@ -34,6 +34,40 @@ class Player {
   }
 }
 
+class ViewUpdater {
+  #player1Info;
+  #player2Info;
+  #finalResult;
+  #cells = [[null, null, null], [null, null, null], [null, null, null]];
+
+  constructor() {
+    this.#player1Info = document.querySelector(".player-1");
+    this.#player2Info = document.querySelector(".player-2");
+    this.#finalResult = document.querySelector(".final-result");
+
+    for (let i = 0; i < 9; i++) {
+      const cell = document.querySelector(`.cell-${i}`);
+      this.#cells[parseInt(i / 3)][i % 3] = cell;
+    }
+  }
+
+  setPlayer1InfoContent(text) {
+    this.#player1Info.textContent = text;
+  }
+
+  setPlayer2Content(text) {
+    this.#player2Info.textContent = text;
+  }
+
+  setFinalResultContent(text) {
+    this.#finalResult.textContent = text;
+  }
+
+  drawSymbolCell(symbol, pos) {
+    this.#cells[pos[0]][pos[1]].textContent = symbol;
+  }
+}
+
 class Game {
   #player1;
   #player2;
@@ -163,20 +197,20 @@ const game = (function() {
   };
 })();
 
-const player1Info = document.querySelector(".player-1");
-const player2Info = document.querySelector(".player-2");
-const finalResult = document.querySelector(".final-result");
+// const player1Info = document.querySelector(".player-1");
+// const player2Info = document.querySelector(".player-2");
+// const finalResult = document.querySelector(".final-result");
 
-for (let i = 0; i < 9; i++) {
-  const cell = document.querySelector(`.cell-${i}`);
-  const pos = [parseInt(i / 3), i % 3];
-  cell.addEventListener("click", () => game.markSymbol(pos, cell));
-}
+// for (let i = 0; i < 9; i++) {
+//   const cell = document.querySelector(`.cell-${i}`);
+//   const pos = [parseInt(i / 3), i % 3];
+//   cell.addEventListener("click", () => game.markSymbol(pos, cell));
+// }
 
 const player1Name = prompt("플레이어 1 이름 입력");
 const player2Name = prompt("플레이어 2 이름 입력");
 
-player1Info.textContent = `${player1Name} -> O`;
-player2Info.textContent = `${player2Name} -> X`;
-game.setPlayer1("O", player1Name);
-game.setPlayer2("X", player2Name);
+// player1Info.textContent = `${player1Name} -> O`;
+// player2Info.textContent = `${player2Name} -> X`;
+// game.setPlayer1("O", player1Name);
+// game.setPlayer2("X", player2Name);
