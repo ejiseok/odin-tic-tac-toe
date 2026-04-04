@@ -22,7 +22,9 @@ class ViewUpdater {
   #finalResult;
   #cells = [[null, null, null], [null, null, null], [null, null, null]];
 
-  constructor() {
+  #game;
+
+  constructor(game) {
     this.#player1Info = document.querySelector(".player-1");
     this.#player2Info = document.querySelector(".player-2");
     this.#finalResult = document.querySelector(".final-result");
@@ -31,6 +33,8 @@ class ViewUpdater {
       const cell = document.querySelector(`.cell-${i}`);
       this.#cells[parseInt(i / 3)][i % 3] = cell;
     }
+
+    this.#game = game;
   }
 
   setPlayer1InfoContent(text) {
@@ -47,6 +51,14 @@ class ViewUpdater {
 
   drawSymbolCell(symbol, pos) {
     this.#cells[pos[0]][pos[1]].textContent = symbol;
+  }
+
+  addHandlerToEachCell() {
+    for (let i = 0; i < this.#cells.length; i++) {
+      for (let j = 0; j < this.#cells[i].length; j++) {
+
+      }
+    }
   }
 }
 
@@ -135,7 +147,7 @@ class Game {
     return "DRAW";
   }
 
-  markSymbol(pos) {
+  #markSymbol(pos) {
     if (this.#board[pos[0]][pos[1]] !== null) {
       return;
     }
@@ -151,6 +163,7 @@ const player1Name = prompt("플레이어 1 이름 입력");
 const player2Name = prompt("플레이어 2 이름 입력");
 
 const viewUpdater = new ViewUpdater();
+const game = new Game(new Player("O", player1Name), new Player("X", player2Name), viewUpdater);
 
 viewUpdater.setPlayer1InfoContent(`${player1Name} -> O`);
 viewUpdater.setPlayer2InfoContent(`${player2Name} -> X`);
